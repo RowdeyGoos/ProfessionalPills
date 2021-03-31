@@ -16,19 +16,16 @@ class CreateParticipantsTable extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname');
-            $table->string('insertion')->nullable();
-            $table->string('lastname');
-            $table->unsignedTinyInteger('gender')->default(Participant::GENDER_MALE);
-            $table->date('birthday');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('address');
-            $table->string('postcode');
-            $table->string('city');
+            $table->unsignedBigInteger('user_id');
+            $table->string('description');
             $table->unsignedTinyInteger('status')->default(Participant::STATUS_PENDING);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

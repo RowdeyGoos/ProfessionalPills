@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Participant;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,31 +14,18 @@ class ParticipantsController extends Controller
     {
         // Validate input
         $fields = $request->validate([
-            'firstname' => 'required|min:2',
-            'insertion' => 'nullable',
-            'lastname' => 'required|min:2',
-            'gender' => 'required|integer|digits_between:' . Participant::GENDER_MALE . ',' . Participant::GENDER_OTHER,
-            'birthday' => 'required|date',
-            'email' => 'required|email|unique:Participants',
-            'phone' => 'nullable',
-            'address' => 'required|min:2',
-            'postcode' => 'required|min:2',
-            'city' => 'required|min:2',
+            'description' => 'nullable',
         ]);
 
-        // Create user
+        // Create participant
+
         Participant::create([
-            'firstname' => $fields['firstname'],
-            'insertion' => $fields['insertion'],
-            'lastname' => $fields['lastname'],
-            'gender' => $fields['gender'],
-            'birthday' => $fields['birthday'],
-            'email' => $fields['email'],
-            'phone' => $fields['phone'],
-            'address' => $fields['address'],
-            'postcode' => $fields['postcode'],
-            'city' => $fields['city'],
+            'description' => $fields['description'],
+            'user_id' => $request->user()->id,
         ]);
+//        $user->participant()->create([
+//            'description' => $fields['description'],
+//        ]);
 
         return redirect()->route('signupsuccessful');
     }

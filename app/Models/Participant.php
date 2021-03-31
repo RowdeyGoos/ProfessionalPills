@@ -23,48 +23,15 @@ class Participant extends Model
      *
      * @var array
      */
-
-
     protected $fillable = [
-        'firstname',
-        'insertion',
-        'lastname',
-        'gender',
-        'birthday',
-        'email',
-        'phone',
-        'address',
-        'postcode',
-        'city',
-        'password',
+        'description',
+        'user_id'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    // Get user full name (firstname insertion lastname)
-    public function name()
+    // A participant belongs to an user
+    public function user()
     {
-        if ($this->insertion != null) {
-            return $this->firstname . ' ' . $this->insertion . ' ' . $this->lastname;
-        } else {
-            return $this->firstname . ' ' . $this->lastname;
-        }
+        return $this->belongsTo(User::class);
     }
 }

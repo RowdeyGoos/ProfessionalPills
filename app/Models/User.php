@@ -11,6 +11,14 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    //All provinces of the Netherlands
+    const PROVINCES = ["Drenthe", "Flevoland", "Gelderland", "Groningen". "Limburg", "North Brabant", "North Holland", "Overijssel", "South Holland", "Utrecht", "Zeeland"];
+
+    // A user can be male, female or other
+    const GENDER_MALE = 0;
+    const GENDER_FEMALE = 1;
+    const GENDER_OTHER = 2;
+
     // A user can be normal or an admin
     const ROLE_NORMAL = 0;
     const ROLE_ADMIN = 1;
@@ -21,8 +29,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'insertion',
+        'lastname',
+        'gender',
+        'birthday',
         'email',
+        'phone',
+        'address',
+        'postcode',
+        'city',
+        'province',
         'password',
         'role',
     ];
@@ -45,4 +62,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Get user full name (firstname insertion lastname)
+    public function name()
+    {
+        if ($this->insertion != null) {
+            return $this->firstname . ' ' . $this->insertion . ' ' . $this->lastname;
+        } else {
+            return $this->firstname . ' ' . $this->lastname;
+        }
+    }
+
+    // An user can be a particpant
+    public function participant()
+    {
+        return $this->hasOne(Participant::class);
+    }
 }

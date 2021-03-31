@@ -37,15 +37,33 @@ class AuthController extends Controller
     {
         // Validate input
         $fields = $request->validate([
-            'name' => 'required|min:2',
-            'email' => 'required|email|unique:users',
+            'firstname' => 'required|min:2|max:48',
+            'insertion' => 'nullable|max:16',
+            'lastname' => 'required|min:2|max:48',
+            'gender' => 'required|integer|digits_between:' . User::GENDER_MALE . ',' . User::GENDER_OTHER,
+            'birthday' => 'required|date',
+            'email' => 'required|email|max:255|unique:users',
+            'phone' => 'nullable|max:255',
+            'address' => 'required|min:2|max:255',
+            'postcode' => 'required|min:2|max:255',
+            'city' => 'required|min:2|max:255',
+            'province' => 'required|min:2|max:255',
             'password' => 'required|min:6|confirmed'
         ]);
 
         // Create user
         User::create([
-            'name' => $fields['name'],
+            'firstname' => $fields['firstname'],
+            'insertion' => $fields['insertion'],
+            'lastname' => $fields['lastname'],
+            'gender' => $fields['gender'],
+            'birthday' => $fields['birthday'],
             'email' => $fields['email'],
+            'phone' => $fields['phone'],
+            'address' => $fields['address'],
+            'postcode' => $fields['postcode'],
+            'city' => $fields['city'],
+            'province' => $fields['province'],
             'password' => Hash::make($fields['password']),
 
             // First created account is always admin
