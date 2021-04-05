@@ -18,6 +18,9 @@ class Participant extends Model
     const STATUS_APPROVED = 1;
     const STATUS_DENIED = 2;
 
+    const LOCATIONS = ["Wilhelmina Hospital", "FlevoHospital ALmere", "Nij Smellinghe Ziekenhuis", "Gelderland Valley Hospital", "University Medical Center Groningen", "Ziekenhuis Oost-Limburg", "Jeroen Bosch Ziekenhuis", "Amstelland Hospital", "Saxenburgh Medical Center", "Erasmus University Medical Center", "UMC Utrecht", "Adrz Medical Center"];
+    const PROVINCES = ["Drenthe", "Flevoland", "Friesland", "Gelderland", "Groningen", "Limburg", "North Brabant", "North Holland", "Overijssel", "South Holland", "Utrecht", "Zeeland"];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +28,8 @@ class Participant extends Model
      */
     protected $fillable = [
         'description',
-        'user_id'
+        'user_id',
+        'location'
     ];
 
 
@@ -33,5 +37,19 @@ class Participant extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function province()
+    {
+        return $this->user->province;
+    }
+
+    public function setLocation()
+    {
+        for ($x = 0; $x <= 12; $x+=1) {
+            if (self::PROVINCES[$x] == $this->province()) {
+                $this->location = self::LOCATIONS[$x];
+            }
+        }
     }
 }

@@ -19,13 +19,16 @@ class ParticipantsController extends Controller
 
         // Create participant
 
-        Participant::create([
+        $participant = Participant::create([
             'description' => $fields['description'],
             'user_id' => $request->user()->id,
         ]);
 //        $user->participant()->create([
 //            'description' => $fields['description'],
 //        ]);
+
+        $participant->setLocation();
+        $participant->save();
 
         return redirect()->route('signupsuccessful');
     }

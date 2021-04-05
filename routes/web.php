@@ -40,6 +40,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
+// Admin routes
+Route::middleware('admin')->group(function () {
+    // Admin home
+    Route::view('/admin', 'admin.home')->name('admin.home');
+});
+
 // Guest routes
 Route::middleware('guest')->group(function () {
     // Auth login

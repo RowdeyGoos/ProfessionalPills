@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Doctors
+Route::get('medicalrecords/{medicalrecord}');
+Route::get('materials');
+Route::post('participants/{participant}/results');
+Route::get('participants/{participant}');
+
+

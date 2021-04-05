@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     //All provinces of the Netherlands
-    const PROVINCES = ["Drenthe", "Flevoland", "Gelderland", "Groningen". "Limburg", "North Brabant", "North Holland", "Overijssel", "South Holland", "Utrecht", "Zeeland"];
+    const PROVINCES = ["Drenthe", "Flevoland", "Friesland", "Gelderland", "Groningen", "Limburg", "North Brabant", "North Holland", "Overijssel", "South Holland", "Utrecht", "Zeeland"];
 
     // A user can be male, female or other
     const GENDER_MALE = 0;

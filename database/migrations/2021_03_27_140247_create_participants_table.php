@@ -19,6 +19,8 @@ class CreateParticipantsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('description');
             $table->unsignedTinyInteger('status')->default(Participant::STATUS_PENDING);
+            $table->string('location');
+            $table->string('trial_results')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
