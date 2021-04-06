@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\api\ApiMaterialController;
+use App\Http\Controllers\api\ApiMedicalRecordsController;
+use App\Http\Controllers\api\ApiParticipantsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +22,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Doctors
-Route::get('medicalrecords/{medicalrecord}');
-Route::get('materials');
-Route::post('participants/{participant}/results');
-Route::get('participants/{participant}');
+Route::get('medicalrecords/{medicalrecord}', [ApiMedicalRecordsController::class, 'show']);
+Route::get('materials', [ApiMaterialController::class, 'index']);
+Route::post('participants/{participant}/results', [ApiParticipantsController::class, 'update']);
+Route::get('participants/{participant}', [ApiParticipantsController::class, 'show']);
 
 

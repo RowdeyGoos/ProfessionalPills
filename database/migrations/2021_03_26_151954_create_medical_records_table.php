@@ -18,7 +18,8 @@ class CreateMedicalRecordsTable extends Migration
             $table->text('problems');
             $table->text('medication');
             $table->text('history');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

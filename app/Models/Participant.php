@@ -29,7 +29,8 @@ class Participant extends Model
     protected $fillable = [
         'description',
         'user_id',
-        'location'
+        'location',
+        'trial_results'
     ];
 
 
@@ -46,10 +47,15 @@ class Participant extends Model
 
     public function setLocation()
     {
-        for ($x = 0; $x <= 12; $x+=1) {
+        for ($x = 0; $x < 12; $x+=1) {
             if (self::PROVINCES[$x] == $this->province()) {
                 $this->location = self::LOCATIONS[$x];
             }
         }
     }
+
+//    public function getCount()
+//    {
+//
+//    }
 }

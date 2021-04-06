@@ -11,14 +11,16 @@ class ApiParticipantsController extends Controller
     // Api participants show route
     public function show(Participant $participant)
     {
-        // Return the medicalrecord
+        // Return the participant
         return $participant;
     }
 
-    public function Update(Request $request, Participant $participant)
+    public function update(Request $request, Participant $participant)
     {
         $participant->update([
             'trial_results' => $request->input('trial_results'),
         ]);
+
+        return $participant;
     }
 }
