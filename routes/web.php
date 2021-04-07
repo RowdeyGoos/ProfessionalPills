@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminUsersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ParticipantsController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ Route::middleware('auth')->group(function () {
 
     // Auth routes
     Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+    Route::get('/admin/users', [AdminUsersController::class, 'index'])->name('admin.users.index');
 });
 
 // Admin routes
