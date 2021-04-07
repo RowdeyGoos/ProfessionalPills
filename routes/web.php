@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     // Auth routes
     Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-    Route::get('/admin/users', [AdminUsersController::class, 'index'])->name('admin.users.index');
+    Route::delete('/admin/delete', [AdminUsersController::class, 'delete'])->name('admin.users.delete');
 });
 
 // Admin routes
