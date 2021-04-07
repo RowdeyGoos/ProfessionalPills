@@ -15,9 +15,9 @@ class CreateMedicalRecordsTable extends Migration
     {
         Schema::create('medical_records', function (Blueprint $table) {
             $table->id();
-            $table->text('problems');
-            $table->text('medication');
-            $table->text('history');
+            $table->text('problems')->nullable();
+            $table->text('medication')->nullable();
+            $table->text('history')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
